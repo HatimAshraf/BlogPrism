@@ -1,14 +1,20 @@
-import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
-import { redirect } from 'next/navigation';
+import { buttonVariants } from '@/components/ui/button';
+import Link from 'next/link';
 
 const dashboard = async () => {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
-
-  if (!user) {
-    return redirect('/api/auth/register');
-  }
-  return <div>dashboard</div>;
+  return (
+    <div>
+      <div className='flex items-center justify-between my-4'>
+        <h2 className='text-xl font-medium'>Your Blog Articles</h2>
+        <Link
+          href='/dashboard/create'
+          className={buttonVariants({ variant: 'outline' })}
+        >
+          Create new Blog
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default dashboard;

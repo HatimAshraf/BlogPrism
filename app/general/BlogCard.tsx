@@ -8,11 +8,9 @@ interface BlogCardProps {
     title: string;
     content: string;
     imageUrl: string;
-    authorId: string;
     authorName: string;
     authorImage: string;
     createdAt: Date;
-    updatedAt: Date;
   };
 }
 async function BlogCard({ data }: BlogCardProps) {

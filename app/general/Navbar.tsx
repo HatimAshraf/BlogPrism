@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { Button, buttonVariants } from '../../components/ui/button';
+import { buttonVariants } from '../../components/ui/button';
 import {
   RegisterLink,
   LoginLink,

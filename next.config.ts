@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname:"upload.wikimedia.org",
         protocol:"https",
         port:'',
+      },
+      {
+        hostname:"lh3.googleusercontent.com",
+        protocol:"https",
+        port:'',
       }
     ]
   }

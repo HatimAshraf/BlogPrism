@@ -1,10 +1,13 @@
 "use server"
-import { redirect } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { prisma } from "./utils/db";
 import { getUser } from './kindeUser';
 
 export async function handleSubmission(formData: FormData){
   const user = await getUser()
+  if(!user){
+    return redirect('/api/auth/register')
+  }
   const data = await prisma.blogPost.create({
     data: {
       title: formData.get('title') as string,
@@ -16,7 +19,7 @@ export async function handleSubmission(formData: FormData){
 
     }
   })
-  return redirect('/dashboard')
+  return (redirect('/dashboard'))
 }
 
 
@@ -43,12 +46,18 @@ export async function getPost(id: string) {
       id: id,
     },
   });
+  if(!data){
+    return notFound()
+  }
 
   return data;
 }
 
 export async function getUserData(){
   const user = await getUser()
+  await new Promise((resolve)=>{
+    setTimeout(resolve, 2000)
+  })
   const data = await prisma.blogPost.findMany({
     where: {
       authorId: user.id

@@ -1,5 +1,6 @@
 import { handleSubmission } from '@/app/action';
-import { Button } from '@/components/ui/button';
+import Submitbutton from '@/app/general/Submitbutton';
+// import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -38,7 +39,7 @@ function createBlog() {
                 placeholder='Image URL'
               />
             </div>
-            <Button>Create Post</Button>
+            <Submitbutton />
           </form>
         </CardContent>
       </Card>

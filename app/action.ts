@@ -1,10 +1,9 @@
 "use server"
 import { redirect } from 'next/navigation';
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { prisma } from "./utils/db";
+import { getUser } from './kindeUser';
 
 export async function handleSubmission(formData: FormData){
-  const {getUser} =  getKindeServerSession() 
   const user = await getUser()
   const data = await prisma.blogPost.create({
     data: {
@@ -18,4 +17,45 @@ export async function handleSubmission(formData: FormData){
     }
   })
   return redirect('/dashboard')
+}
+
+
+export async function getData() {
+  const data = await prisma.blogPost.findMany({
+    select: {
+      title: true,
+      imageUrl: true,
+      content: true,
+      id: true,
+      authorImage: true,
+      authorName: true,
+      createdAt: true,
+    },
+  });
+
+  return data;
+}
+
+export async function getPost(id: string) {
+
+  const data = await prisma.blogPost.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  return data;
+}
+
+export async function getUserData(){
+  const user = await getUser()
+  const data = await prisma.blogPost.findMany({
+    where: {
+      authorId: user.id
+    },
+    orderBy: {
+      createdAt: 'desc'
+    }
+  })
+  return data
 }

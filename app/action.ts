@@ -2,6 +2,7 @@
 import { notFound, redirect } from 'next/navigation';
 import { prisma } from "./utils/db";
 import { getUser } from './kindeUser';
+import { revalidatePath } from 'next/cache';
 
 export async function handleSubmission(formData: FormData){
   const user = await getUser()
@@ -19,6 +20,7 @@ export async function handleSubmission(formData: FormData){
 
     }
   })
+  revalidatePath('/')
   return (redirect('/dashboard'))
 }
 

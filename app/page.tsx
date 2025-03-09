@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { getData } from './action';
 import BlogCard from './general/BlogCard';
 
+export const revalidate = 60;
 async function BlogPost() {
   const data = await getData();
   return (

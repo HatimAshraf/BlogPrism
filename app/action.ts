@@ -56,7 +56,7 @@ export async function getPost(id: string) {
 export async function getUserData(){
   const user = await getUser()
   await new Promise((resolve)=>{
-    setTimeout(resolve, 2000)
+    setTimeout(resolve, 1000)
   })
   const data = await prisma.blogPost.findMany({
     where: {

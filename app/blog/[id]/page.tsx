@@ -1,5 +1,5 @@
 import { getPost } from '@/app/action';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -26,9 +26,25 @@ async function page({ params }: { params: Params }) {
               className='object-cover'
             />
           </div>
-          <p className='text-lg font-medium text-gray-600'>{data.authorName}</p>
+          <div className='flex items-center justify-around'>
+            <div>
+              <p className='text-lg font-medium text-gray-600'>
+                {data.authorName}
+              </p>
+            </div>
+            <div>
+              <p className='text-lg font-medium text-gray-600'>
+                {new Intl.DateTimeFormat('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                }).format(data.createdAt)}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+
       <div className='relative h-96 overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-300 shadow-md'>
         <Image
           src={data.imageUrl}
